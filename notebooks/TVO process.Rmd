@@ -1,0 +1,100 @@
+---
+title: "TVO papieren afname process"
+author: "Adam Sasiadek"
+date: "8 maart 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introductie
+
+In dit document worden de stappen beschreven om een successvolle papieren afname
+in TestVision Online af te nemen.
+
+## Assumpties
+
+1.De docent is bekwaam met TV.
+2.Secretariaaten zijn bekwaam met het inladen van data in TV.
+
+
+## Workflow
+
+De docent heeft een account in TV. 
+De docent heeft een eigen map in TV.
+De nodige rechten zijn toegekend aan de docent. 
+De docent maakt vragen aan voor een toets.
+
+De docent is klaar met vragen maken voor de toets.
+De docent geeft aan de toetscoordinator door dat de toets klaar is.
+De toetscoordinator stelt toets samen en publiceerd de toets. 
+Toetscoordinator geeft aan planner door dat de toets kan worden ingepland. 
+De planner maakt een afname aan. De studenten worden toegevoegd etc. 
+De planner stuurt twee pdf versies van de toets aan de docent. 
+
+De toets wordt afgenomen. 
+
+De schrapkaarten worden ingescanned door het secretariaat. 
+De resultaten worden ingelezen in TvO. 
+De corrector kan beginnen met nakijken. 
+De docent krijgt toegang tot de item analyses. 
+
+Secretariaat verwerkt indien nodig de correcties op de items en publiceert de eindcijfers. 
+
+## Sequence diagram
+
+```{r}
+library(DiagrammeR)
+mermaid(width = 1280, height = 800 ,"
+sequenceDiagram
+  Note over Docent: Maakt de vragen. + Stelt de toets samen
+  Docent->>Toetscoordinator: Vragen zijn klaar.
+  Note over Toetscoordinator: Voert indien nodig redactieslag uit + publiceert de toets. 
+  Toetscoordinator->>Secretariaat: Toets is gepubliceerd.
+  Note over Secretariaat: Maakt toetsafname aan en voegt studenten (uit SiS) toe. 
+  Note over Secretariaat: Print pdf versie van toets. 
+  Secretariaat->>Docent: Pdf versie van toets.
+  Note over Docent: Neemt de toets af. 
+  Docent->>Secretariaat: Ingevulde schrapkaarten.
+  Docent->>Corrector: Open vragen.
+  Note over Corrector: Kijkt open vragen na. 
+  Note over Secretariaat: Scant schrapkaarten in en zet gegevens in TestVision.
+  Secretariaat->>Docent: Inlezen gelukt.
+  Note over Docent: Goedrekenen van open vragen.
+  Note over Docent: Bekijken item analyses & bepalen correcties.
+  loop Samenwerking
+    Docent->>Toetscoordinator: akkoord?
+    Toetscoordinator->>Docent: Ja/Nee!
+  end
+  Note over Docent: Legt resultaten/Analyses vast.
+  Docent->>Student: Je resultaten voor deze toets zijn online!
+")
+```
+  
+## Voordelen TVO over papieren afname
+
+-Opbouw item bank
+-Archief
+-Extra check van tentamen door 3e persoon
+-Student weet al waar de resultaten komen
+-Husseling is makkelijk
+-Future proof
+
+
+## Nadelen TVO 
+
+-Meer coordinatie bij de voorbereiding. 
+-Nakijken van open vragen blijft een issue. 
+
+## Oplossingen/Tegenargumenten
+
+-Meer coordinatie, maar ook een test van je tentamen
+-Misschien kunnen we de open vragen ook scannen en uploaden?
+
+
+
+
